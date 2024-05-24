@@ -25,7 +25,8 @@
       <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#e8eaed">
         <path d="M435-139v-508L202-415l-63-65 342-342 341 341-64 66-232-232v508h-91Z" />
       </svg>
-    </span></button>
+    </span>
+  </button>
 
   <!-- NAVBAR -->
   <nav class="bg-navbar navbar navbar-expand-lg position-sticky top-0 z-1">
@@ -42,17 +43,38 @@
           <a class="nav-link link" href="#about">About</a>
           <a class="nav-link link" href="#gallery">Gallery</a>
           <a class="nav-link link" href="#produk">Produk</a>
-          <a class="nav-link link" href="#contact">Contact</a>
-          <!-- <a href="#" class="btn">
-            <span class=""> search </span>
+          <div class="btn-group">
+            <button class="btn btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Profil
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="dashboard.php">Dashboard</a></li>
+              <li><a class="dropdown-item" href="tambah.php">Tambah Barang</a></li>
+              <li>
+                <form class="d-flex mt-3" role="search">
+                  <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn" type="submit">
+                    <span class="material-symbols-outlined"> search </span>
+                  </button>
+                </form>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+            </ul>
+          </div>
+          <div class="btn-group">
+            <a class="nav-link link" href="#contact">Contact</a>
+            <!-- <a href="#" class="btn">
+            <span class="material-symbols-outlined"> search </span>
               <form action="" method="POST">
                 <input type="text" name="keyword">       
               </form>
             </a> -->
-          <a class="nav-link link" href="login.php">login</a>
+          </div>
         </div>
       </div>
-    </div>
   </nav>
 
   <!-- HOME -->
@@ -74,13 +96,12 @@
     </div>
   </section>
 
-
   <!-- about -->
   <main>
     <section id="about">
       <div class="container about">
         <h1>Tentang kami</h1>
-        <div class="d-flex row justify-content-center">
+        <div class="d-flex row justify-content-center ">
           <img data-aos="fade-up" data-aos-delay="500" data-aos-duration="500" src="img/logo/logo4.png" class="mx-5" salt="gambar" />
           <p class="prag w-50 col" style="text-align: justify">
             Bengkel ini di buat di kota Prestige Roleplay, bengkel pertama di
@@ -222,7 +243,7 @@
     <!-- produk -->
     <section id="produk">
       <div class="container engine">
-        <h1 class="m-5">Produk</h1>
+        <h1 class="m-5 p">Produk</h1>
         <div class="d-flex flex-wrap gap-4 justify-content-center">
           <div class="card" style="width: 18rem" class="card-body" class="img-box" data-aos="fade-up" data-aos-delay="1000" data-aos-duration="500">
             <img src="img/mesin/mesin 2jz.png" class="card-img-top p-2" alt="gambar" />
