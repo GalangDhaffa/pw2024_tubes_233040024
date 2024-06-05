@@ -1,5 +1,8 @@
 <?php
 
+require 'functions.php';
+
+$add = query("SELECT * FROM products");
 
 ?>
 
@@ -60,7 +63,7 @@
     <div id="carouselExampleSlidesOnly" class="carousel slide home" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="img/G1.png" class="gambar-home d-flex w-200 opacity-75 " height="855" alt="pic1" />
+          <img src="img/gallery/G1.png" class="gambar-home d-flex w-200 opacity-75 " height="855" alt="pic1" />
           <div class="carousel-caption position-absolute text-center home-text d-flex flex-wrap">
             <img src="img/logo/Logo1.png" class="rounded d-block" alt="Logo" />
 
@@ -104,7 +107,7 @@
         <h1 class="heading">Gallery</h1>
         <div class="gallery-image">
           <div class="img-box" data-aos="fade-up-right" data-aos-delay="1000" data-aos-duration="500">
-            <img src="img/G1.png" alt="gambar" />
+            <img src="img/gallery/G1.png" alt="gambar" />
             <div class="transparent-box">
               <div class="caption">
                 <p>Secreto Custom</p>
@@ -112,7 +115,7 @@
             </div>
           </div>
           <div class="img-box" data-aos="fade-up" data-aos-delay="1000" data-aos-duration="500">
-            <img src="img/G2.png" alt="gambar" />
+            <img src="img/gallery/G2.png" alt="gambar" />
             <div class="transparent-box">
               <div class="caption">
                 <p>Secreto Custom</p>
@@ -120,7 +123,7 @@
             </div>
           </div>
           <div class="img-box" data-aos="fade-up-left" data-aos-delay="1000" data-aos-duration="500">
-            <img src="img/G3.png" alt="gambar" />
+            <img src="img/gallery/G3.png" alt="gambar" />
             <div class="transparent-box">
               <div class="caption">
                 <p>Secreto Custom</p>
@@ -221,59 +224,37 @@
 
     <!-- produk -->
     <section id="produk">
-      <div class="container engine">
-        <h1 class="m-5">Produk</h1>
+      <div class="container engine p-5">
+        <h1 class="m-5 d-flex flex-wrap gap-4 justify-content-center">Produk</h1>
         <div class="d-flex flex-wrap gap-4 justify-content-center">
-          <div class="card" style="width: 18rem" class="card-body" class="img-box" data-aos="fade-up" data-aos-delay="1000" data-aos-duration="500">
-            <img src="img/mesin/mesin 2jz.png" class="card-img-top p-2" alt="gambar" />
-            <div class="card-body">
-              <h5 class="card-title">$3.500.000</h5>
-              <h5 class="card-title">2JZ</h5>
+          <?php
+          $i = 1;
+          foreach ($add as $d) : ?>
+            <div class="card" style="width: 18rem" class="card-body" class="img-box" data-aos="fade-up" data-aos-delay="1000" data-aos-duration="500">
+              <?php
+              $image = './img/produk/' . ($d['image']);
+              if (file_exists($image)) {
+                echo '<img src="' . $image . '"  class="card-img-top p-2" alt="Produk">';
+              } else {
+                echo 'Gambar tidak ditemukan.';
+              }
+              ?>
 
-              <a href="#" class="btn btn-primary m-2"><span class="m-2">
-                  Details
-                </span></a>
+              <div class="card-body">
+                <h4 class="card-title"><?= $d['name_product'] ?></h4>
+                <h5 class="card-title">$<?= $d['price'] ?></h5>
+
+                <a href="details.php?id_product=<?= $d['id_product']; ?>" class="btn btn-primary m-2"><span class="m-2">
+                    Details
+                  </span></a>
+              </div>
             </div>
-          </div>
-
-          <div class="card" style="width: 18rem" class="card-body" class="img-box" data-aos="fade-up" data-aos-delay="500" data-aos-duration="500">
-            <img src="img/Mesin/mesin lambo v10.png" class="card-img-top p-2" alt="gambar" />
-            <div class="card-body">
-              <h5 class="card-title">$5.000.000</h5>
-              <h5 class="card-title">Lambo V10</h5>
-
-              <a href="#" class="btn btn-primary m-2"><span class="m-2">
-                  Details
-                </span></a>
-            </div>
-          </div>
-
-          <div class="card" style="width: 18rem" class="card-body" class="img-box" data-aos="fade-up" data-aos-delay="500" data-aos-duration="500">
-            <img src="img/mesin/mesin mus v8.png" class="card-img-top p-2" alt="gambar" />
-            <div class="card-body">
-              <h5 class="card-title">$2.500.000</h5>
-              <h5 class="card-title">Mus V8</h5>
-
-              <a href="#" class="btn btn-primary m-2"><span class="m-2">
-                  Details
-                </span></a>
-            </div>
-          </div>
-
-          <div class="card" style="width: 18rem" class="card-body" class="img-box" data-aos="fade-up" data-aos-delay="1000" data-aos-duration="500">
-            <img src="img/mesin/mesin predator v8.png" class="card-img-top p-2" alt="gambar" />
-            <div class="card-body">
-              <h5 class="card-title">$2.000.000</h5>
-              <h5 class="card-title">Predator V8</h5>
-
-              <a href="#" class="btn btn-primary m-2"><span class="m-2">
-                  Details
-                </span></a>
-            </div>
-          </div>
+          <?php
+          endforeach;
+          ?>
         </div>
       </div>
-    </section>
+    </section>  
 
     <!-- contact -->
     <section id="contact">

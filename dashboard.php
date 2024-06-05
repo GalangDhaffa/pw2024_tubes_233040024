@@ -10,6 +10,10 @@ require 'functions.php';
 
 $add = query("SELECT * FROM products");
 
+if(isset($_POST['cari'])) {
+  $add = cari($_POST['keyword']);
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -61,14 +65,16 @@ $add = query("SELECT * FROM products");
                 <li>
                   <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                <li><a class="dropdown-item" href="logout.php"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5"/>
+</svg> Logout</a></li>
               </ul>
             </li>
           </ul>
-          <form class="d-flex mt-3" role="search">
-            <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
+          <form class="d-flex mt-3" role="search" method="POST">
+            <input class="form-control me-2 " type="search"  aria-label="Search" name="keyword" size="30" placeholder="masukan keyword pencarian">
             <button class="btn" type="submit">
-              <span class="material-symbols-outlined"> search </span>
+              <span class="material-symbols-outlined" name="cari"> search </span>
             </button>
           </form>
         </div>
@@ -101,7 +107,9 @@ $add = query("SELECT * FROM products");
             <td><?= $d['name_product'] ?></td>
             <td><?= $d['stock_product'] ?></td>
             <td><?= $d['price'] ?></td>
-            <td><a href=""><?= $d['image'] ?></a></td>
+            <td>
+              <a href="detail_gambar.php?id_product=<?= $d['id_product']; ?>" class="badge text-bg-primary text-decoration-none">Lihat Gambar</a>
+            </td>
             <td>
               <a href="ubah.php?id_product=<?= $d['id_product']; ?>" class="badge text-bg-warning text-decoration-none">Ubah</a>
               <a href="hapus.php?id_product=<?= $d['id_product']; ?>" onclick="return confirm('apakah anda yakin?')" class="badge text-bg-danger text-decoration-none">Hapus</a>

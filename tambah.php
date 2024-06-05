@@ -67,20 +67,23 @@ if (isset($_POST['tambah'])) {
                 <li>
                   <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                <li><a class="dropdown-item" href="logout.php"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5" />
+                    </svg> Logout</a></li>
               </ul>
             </li>
           </ul>
-          <form class="d-flex mt-3" role="search">
-            <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
+          <form class="d-flex mt-3" role="search" method="POST">
+            <input class="form-control me-2 " type="search" aria-label="Search" name="keyword" size="30" placeholder="masukan keyword pencarian">
             <button class="btn" type="submit">
-              <span class="material-symbols-outlined"> search </span>
+              <span class="material-symbols-outlined" name="cari"> search </span>
             </button>
           </form>
         </div>
       </div>
     </div>
   </nav>
+
   <!-- Tambah Data -->
   <h3 class="container p-5">Tambah Stok Produk</h3>
   <form method="POST" enctype="multipart/form-data">
@@ -99,12 +102,18 @@ if (isset($_POST['tambah'])) {
       </div>
       <div class="mb-3">
         <label for="formGroupExampleInput2" class="form-label">Gambar</label>
-        <input class="form-control" type="file" id="image" name="image">
+        <input class="form-control gambar-noft" onchange="previewImage()" type="file" id="image" name="image">
+        <img src="./img/produk/nophoto.png" width="120" style="display: block;" alt="..." class="img-preview m-2">
       </div>
+      <a href="dashboard.php" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5" />
+        </svg>kembali</a>
       <button type="submit" class="btn btn-primary" name="tambah">Upload Data</button>
     </div>
   </form>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-  </script>
+</script>
+<script src="./js/script.js"></script>
+
 </html>

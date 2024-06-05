@@ -4,9 +4,9 @@ function koneksi()
 {
   return mysqli_connect('localhost', 'root', '', 'pw2024_tubes_233040024');
 }
+
 function query($query)
 {
-
   $conn = koneksi();
   $result = mysqli_query($conn, $query);
 
@@ -19,7 +19,6 @@ function query($query)
 }
 
 // tambah data
-
 function upload($file)
 {
   $nama_file = $_FILES['image']['name'];
@@ -29,10 +28,7 @@ function upload($file)
   $tmp_file = $_FILES['image']['tmp_name'];
 
   if ($error == 4) {
-    echo "<script>
-        alert('pilih gambar terlebih dahulu!');
-          </script>";
-    return false;
+    return 'nophoto.png';
   }
 
   $daftar_gambar = ['jpg', 'jpeg', 'png'];
@@ -54,7 +50,6 @@ function upload($file)
   }
 
   // cek ukuran file
-  //  maksimal file 5mb
   if ($ukuran_file > 5000000) {
     echo "<script>
         alert('ukuran gambar terlalu besar!');
@@ -63,15 +58,17 @@ function upload($file)
   }
 
   // lolos pengecekan siap upload file
-  // generate nama file baru
   $nama_file_baru = uniqid();
   $nama_file_baru .= '.';
   $nama_file_baru .= $ekstensi_file;
 
-  move_uploaded_file($tmp_file, './img/produk'. $nama_file_baru);
+  if (!move_uploaded_file($tmp_file, './img/produk/' . $nama_file_baru)) {
+    return false;
+  }
 
   return $nama_file_baru;
 }
+
 function tambah($data)
 {
   $conn = koneksi();
@@ -79,16 +76,13 @@ function tambah($data)
   $nama_produk = htmlspecialchars($data['name_product']);
   $stok = htmlspecialchars($data['stock_product']);
   $harga = htmlspecialchars($data['price']);
-  // $gambar = htmlspecialchars($data['image']);
 
-  // tambah gambar
   $image = upload($_FILES['image']);
   if (!$image) {
     return false;
   }
 
-  $query = "INSERT INTO 
-            products
+  $query = "INSERT INTO products
             VALUES
             (null, '$nama_produk', '$stok', '$harga', '$image')";
 
@@ -102,18 +96,32 @@ function ubah($data)
 {
   $conn = koneksi();
 
-  $id_product = ($data['id_product']);
+  $id_product = $data['id_product'];
   $nama_produk = htmlspecialchars($data['name_product']);
   $stok = htmlspecialchars($data['stock_product']);
   $harga = htmlspecialchars($data['price']);
-  $gambar = htmlspecialchars($data['image']);
+  $gambar_lama = htmlspecialchars($data['gambar_lama']);
 
-  $query = "UPDATE products set
+  if ($_FILES['image']['error'] === 4) {
+    $gambar = $gambar_lama;
+  } else {
+    $gambar = upload($_FILES['image']);
+    if (!$gambar) {
+      return false;
+    }
+  }
+
+  $query = "UPDATE products SET
             name_product = '$nama_produk',
             stock_product = '$stok',
             price = '$harga',
             image = '$gambar'
             WHERE id_product = $id_product";
+
+  $d = query("SELECT * FROM products WHERE id_product = $id_product")[0];
+  if ($d['image'] != 'nophoto.png') {
+    unlink('./img/produk/' . $d['image']);
+  }
 
   mysqli_query($conn, $query) or die(mysqli_error($conn));
   echo mysqli_error($conn);
@@ -124,13 +132,17 @@ function ubah($data)
 function hapus($id_product)
 {
   $conn = koneksi();
+
+  $d = query("SELECT * FROM products WHERE id_product = $id_product")[0];
+  if ($d['image'] != 'nophoto.png') {
+    unlink('./img/produk/' . $d['image']);
+  }
+
   mysqli_query($conn, "DELETE FROM products WHERE id_product = $id_product") or die(mysqli_error($conn));
   return mysqli_affected_rows($conn);
 }
 
-
 // login
-$conn = koneksi();
 function login($data)
 {
   $conn = koneksi();
@@ -154,7 +166,7 @@ function login($data)
   }
 }
 
-function regisrasi($data)
+function registrasi($data)
 {
   $conn = koneksi();
 
@@ -202,4 +214,9 @@ function regisrasi($data)
 
   mysqli_query($conn, $query) or die(mysqli_error($conn));
   return mysqli_affected_rows($conn);
+}
+
+// search
+function cari($keyword) {
+  
 }
