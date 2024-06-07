@@ -39,24 +39,30 @@ if (isset($_POST['login'])) {
           <a href="index.php" class="text-decoration-none"><span class="material-symbols-outlined">keyboard_double_arrow_left</span></a>
           <a href="register.php" class="text-decoration-none"><span class="material-symbols-outlined">keyboard_double_arrow_right</span></a>
         </div>
-        <h2 class="text-center">Login</h2>
         <?php if (isset($login['error'])) : ?>
           <p><?= $login['pesan']; ?></p>
         <?php endif; ?>
+        
         <form method="POST">
-          <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username" autofocus autocomplete="off" required>
+          <img class="rounded mx-auto d-block mb-4" src="./img/logo/logo4.png" alt="Logo" width="70" height="70">
+          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+          <div class="form-floating">
+            <input type="username" class="form-control" id="floatingInput" placeholder="Username" id="username" name="username" autofocus autocomplete="off" required>
+            <label for="floatingUsername">Username</label>
           </div>
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required>
+          <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" id="password" name="password" required>
+            <label for="floatingPassword">Password</label>
           </div>
-          <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="rememberMe">
-            <label class="form-check-label" for="rememberMe">Remember me</label>
+
+          <div class="form-check text-start my-3">
+            <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Remember me
+            </label>
           </div>
-          <button type="submit" name="login" class="btn btn-primary w-100">Login</button>
+          <button class="btn btn-primary w-100 py-2" type="submit" name="login">Login</button>
           <a href="register.php" class="text-decoration-none d-flex justify-content-center m-3">Register</a>
         </form>
       </div>

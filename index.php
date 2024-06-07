@@ -24,39 +24,11 @@ $add = query("SELECT * FROM products");
 </head>
 
 <body>
-  <button id="back-to-top" onclick="scrollToTop()"><span class="material-symbols-outlined">
-      <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#e8eaed">
-        <path d="M435-139v-508L202-415l-63-65 342-342 341 341-64 66-232-232v508h-91Z" />
-      </svg>
-    </span></button>
+  <?php include './include/back-to-top.php'; ?>
+
 
   <!-- NAVBAR -->
-  <nav class="bg-navbar navbar navbar-expand-lg position-sticky top-0 z-1">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="img/logo/logo6.gif" alt="Logo" width="50" height="50" class="d-inline-block align-text-top" />
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav ms-auto">
-          <a class="nav-link active link" aria-current="page" href="#home">Home</a>
-          <a class="nav-link link" href="#about">About</a>
-          <a class="nav-link link" href="#gallery">Gallery</a>
-          <a class="nav-link link" href="#produk">Produk</a>
-          <a class="nav-link link" href="#contact">Contact</a>
-          <!-- <a href="#" class="btn">
-            <span class=""> search </span>
-              <form action="" method="POST">
-                <input type="text" name="keyword">       
-              </form>
-            </a> -->
-          <a class="nav-link link" href="login.php">login</a>
-        </div>
-      </div>
-    </div>
-  </nav>
+  <?php include './include/navbar.php'; ?>
 
   <!-- HOME -->
   <section id="home">
@@ -66,7 +38,6 @@ $add = query("SELECT * FROM products");
           <img src="img/gallery/G1.png" class="gambar-home d-flex w-200 opacity-75 " height="855" alt="pic1" />
           <div class="carousel-caption position-absolute text-center home-text d-flex flex-wrap">
             <img src="img/logo/Logo1.png" class="rounded d-block" alt="Logo" />
-
             <p>
               Selamat datang di web secreto Custom. Kami menyediakan service
               terbaik di kota prestige dan berbagai sparepart mobil dan motor
@@ -242,10 +213,10 @@ $add = query("SELECT * FROM products");
 
               <div class="card-body">
                 <h4 class="card-title"><?= $d['name_product'] ?></h4>
-                <h5 class="card-title">$<?= $d['price'] ?></h5>
+                <h5 class="card-title"><?= '$' . number_format($d['price'], 0, ',', '.'); ?></h5>
 
-                <a href="details.php?id_product=<?= $d['id_product']; ?>" class="btn btn-primary m-2"><span class="m-2">
-                    Details
+                <a href="pesan.php?id_product=<?= $d['id_product']; ?>" class="btn btn-primary m-2"><span class="m-2">
+                    Pesan
                   </span></a>
               </div>
             </div>
@@ -254,7 +225,7 @@ $add = query("SELECT * FROM products");
           ?>
         </div>
       </div>
-    </section>  
+    </section>
 
     <!-- contact -->
     <section id="contact">
@@ -270,44 +241,15 @@ $add = query("SELECT * FROM products");
           <div class="pesan col-12 mt-3">
             <textarea class="form-control" placeholder="Pesan" aria-label="Pesan" style="height: 200px; resize: none"></textarea>
           </div>
-          <!-- </div>
-          <button class="btn">Button</button>
-        </div> -->
+        </div>
+        <button class="btn btn-primary">Kirim</button>
+      </div>
     </section>
   </main>
 
   <!-- FOOTER -->
-  <section id="footer">
-    <footer>
-      <div class="container-footer">
-        <div class="socialicons d-flex">
-          <a href="https://www.instagram.com/secreto.custom/"><i><img width="60" height="60" src="img/logo/Instagram.png" alt="logo" /></i></a>
-          <a href="https://discord.gg/uk8qY9dk"><i><img width="60" height="60" src="img/logo/Discord.png" alt="logo" /></i></a>
-          <a href="https://prestigeworld.id/"><i><img width="60" height="60" src="img/logo/Prestige.png" alt="logo" /></i></a>
-          <a href="https://galangdhaffa.github.io/itw2023_project2_233040024/"><i><img width="60" height="60" src="img/logo/logo4.png" alt="logo" /></i></a>
-        </div>
-        <div class="footernav">
-          <ul>
-            <li><a href="#home">Home</a></li>
+  <?php include './include/footer.php'; ?>
 
-            <li><a href="#about">About</a></li>
-
-            <li><a href="#gallery">Gallery</a></li>
-
-            <li><a href="#produk">produk</a></li>
-
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>
-          CopyRight &copy;2023; Designed by
-          <span class="Designer">Dhaffa Galang Fahriza</span>
-        </p>
-      </div>
-    </footer>
-  </section>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

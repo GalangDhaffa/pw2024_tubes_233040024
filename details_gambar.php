@@ -1,4 +1,4 @@
-<?php 
+<?php
 require 'functions.php';
 session_start();
 
@@ -8,7 +8,7 @@ if (!isset($_SESSION['login'])) {
 }
 
 if (!isset($_GET['id_product']) || empty($_GET['id_product'])) {
-    die('ID produk tidak ditemukan.');
+  die('ID produk tidak ditemukan.');
 }
 
 $id_product = intval($_GET['id_product']);
@@ -17,15 +17,16 @@ $d = query("SELECT * FROM products WHERE id_product = $id_product");
 
 
 if (empty($d)) {
-    die('Produk tidak ditemukan.');
+  die('Produk tidak ditemukan.');
 }
 
-$d = $d[0]; 
+$d = $d[0];
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,17 +41,21 @@ $d = $d[0];
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
-<body>
-<?php
 
-$image_path = './img/produk/' . ($d['image']);
-if (file_exists($image_path)) {
-    echo '<img src="' . $image_path . '" width="800" class="rounded mx-auto d-block m-3" alt="Produk">';
-} else {
-    echo 'Gambar tidak ditemukan.';
-}
-?>
+<body>
+  <div class="container">
+    <?php
+
+    $image_path = './img/produk/' . ($d['image']);
+    if (file_exists($image_path)) {
+      echo '<img src="' . $image_path . '" width="800" class="rounded mx-auto d-block m-3" alt="Produk">';
+    } else {
+      echo 'Gambar tidak ditemukan.';
+    }
+    ?>
+  </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-  </script>
+</script>
+
 </html>

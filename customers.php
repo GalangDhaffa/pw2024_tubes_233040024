@@ -6,12 +6,14 @@ if (!isset($_SESSION['login'])) {
   exit;
 }
 
-
+if ($_SESSION['role'] !== 'admin') {
+  header("location: dashboard.php");
+  exit;
+}
 
 require 'functions.php';
 
 $add = query("SELECT * FROM users");
-
 
 ?>
 <!doctype html>
@@ -36,16 +38,49 @@ $add = query("SELECT * FROM users");
 </head>
 
 <body style="height:100vh;">
+  <!-- sidebar -->
   <div class="d-flex h-100">
     <?php include './include/sidebar.php'; ?>
 
+    <div class="container">
+      <h1 class="m-5">Customers</h1>
 
+      <!-- tabel produk -->
+      <div class="containerproduk">
+        <table class="table">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Email</th>
+            <th scope="col">Password</th>
+            <th scope="col">Aksi</th>
+          </tr>
+          <tbody>
+            <?php
+            $i = 1;
+            foreach ($add as $d) : ?>
+              <tr>
+                <th scope="row"><?= $i++ ?></th>
+                <td><?= $d['username'] ?></td>
+                <td><?= $d['email'] ?></td>
+                <td><?= $d['password'] ?></td>
+                <td>
+                  <a href="hapus.php?id_user=<?= $d['id_user']; ?>" onclick="return confirm('apakah anda yakin?')" class="badge text-bg-danger text-decoration-none">Hapus</a>
+                </td>
+              </tr>
 
-
+            <?php
+            endforeach;
+            ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
+  <!-- dasboard -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
   </script>
-  <!-- <script src="./js/script.js"></script> -->
+  <script src="js/script.js"></script>
 </body>
 
 </html>

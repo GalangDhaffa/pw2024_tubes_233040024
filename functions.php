@@ -129,6 +129,8 @@ function ubah($data)
 }
 
 // hapus data
+// produk
+// fungsi hapus produk
 function hapus($id_product)
 {
   $conn = koneksi();
@@ -141,6 +143,16 @@ function hapus($id_product)
   mysqli_query($conn, "DELETE FROM products WHERE id_product = $id_product") or die(mysqli_error($conn));
   return mysqli_affected_rows($conn);
 }
+
+// fungsi hapus user
+function hapus_user($id_user)
+{
+  $conn = koneksi();
+
+  mysqli_query($conn, "DELETE FROM users WHERE id_user = $id_user") or die(mysqli_error($conn));
+  return mysqli_affected_rows($conn);
+}
+
 
 // login
 function login($data)
@@ -156,16 +168,26 @@ function login($data)
     if (password_verify($password, $user['password'])) {
       session_start();
       $_SESSION['login'] = true;
-      header("Location: dashboard.php");
-      exit;
+      if ($user['id_role'] == 1) {
+        $_SESSION['role'] = 'admin';
+        header("Location: dashboard.php");
+
+        exit;
+      } else {
+        $_SESSION['role'] = 'user';
+        header("Location: index_login.php");
+
+        exit;
+      }
     }
     return [
       'error' => true,
-      'pesan' => 'Username / Password salah!'
+      'pesan' => '<p style="color: red; font-style: italic;">username/password salah!</p>'
     ];
   }
 }
 
+// register
 function registrasi($data)
 {
   $conn = koneksi();
@@ -177,46 +199,66 @@ function registrasi($data)
 
   if (empty($username) || empty($email) || empty($password1) || empty($password2)) {
     echo "<script>
-        alert('username / password tidak boleh kosong!');
-        document.location.href = 'register.php';
-        </script>";
+            alert('username / password tidak boleh kosong!');
+            document.location.href = 'register.php';
+            </script>";
     return false;
   }
 
   if (query("SELECT * FROM users WHERE username = '$username'")) {
     echo "<script>
-          alert('username sudah terdaftar!');
-          document.location.href = 'register.php';
-          </script>";
+            alert('username sudah terdaftar!');
+            document.location.href = 'register.php';
+            </script>";
     return false;
   }
 
   if ($password1 !== $password2) {
     echo "<script>
-          alert('konfirmasi password tidak sesuai!');
-          document.location.href = 'register.php';
-          </script>";
+            alert('konfirmasi password tidak sesuai!');
+            document.location.href = 'register.php';
+            </script>";
     return false;
   }
 
   if (strlen($password1) < 5) {
     echo "<script>
-          alert('Password terlalu pendek!');
-          document.location.href = 'register.php';
-          </script>";
+            alert('Password terlalu pendek!');
+            document.location.href = 'register.php';
+            </script>";
     return false;
   }
 
   $password_baru = password_hash($password1, PASSWORD_DEFAULT);
-  $query = "INSERT INTO users (username, email, password) 
-            VALUES 
-            ('$username', '$email', '$password_baru')";
+
+  // Menetapkan id_role secara eksplisit
+  $id_role = 2; // Misalnya, 2 untuk user biasa
+
+  $query = "INSERT INTO users (username, email, password, id_role) 
+              VALUES 
+              ('$username', '$email', '$password_baru', '$id_role')";
 
   mysqli_query($conn, $query) or die(mysqli_error($conn));
   return mysqli_affected_rows($conn);
 }
 
+
 // search
-function cari($keyword) {
-  
+function cari($keyword)
+{
+  $conn = koneksi();
+
+  $query = "SELECT * FROM products WHERE 
+              name_product LIKE '%$keyword%' OR
+              stock_product LIKE '%$keyword%' OR
+              price LIKE '%$keyword%'
+    ";
+
+  $result = mysqli_query($conn, $query);
+  $rows = [];
+  while ($row = mysqli_fetch_assoc($result)) {
+    $rows[] = $row;
+  }
+
+  return $rows;
 }

@@ -6,6 +6,11 @@ if (!isset($_SESSION['login'])) {
   exit;
 }
 
+if ($_SESSION['role'] !== 'admin') {
+  header("location: dashboard.php");
+  exit;
+}
+
 require 'functions.php';
 
 $id_product = $_GET['id_product'];
@@ -42,80 +47,41 @@ if (isset($_POST['ubah'])) {
 </head>
 
 <body>
-  <nav class="navbar bg-navbar">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="img/logo/logo6.gif" alt="Logo" width="50" height="50" class="d-inline-block align-text-top" />
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-        <div class="offcanvas-header off-canvas-color">
-          <h5 class="offcanvas-title " id="offcanvasNavbarLabel">Prestige Custom Garage</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body bg-navbar">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index_login.php">Home</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Account
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="dashboard.php">Dashboard</a></li>
-                <li><a class="dropdown-item" href="tambah.php">Tambah Barang</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="logout.php"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5" />
-                    </svg> Logout</a></li>
-              </ul>
-            </li>
-          </ul>
-          <form class="d-flex mt-3" role="search">
-            <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
-            <button class="btn" type="submit">
-              <span class="material-symbols-outlined"> search </span>
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </nav>
+  <div class="d-flex h-100">
+    <?php include './include/sidebar.php'; ?>
 
-
-  <h3 class="container p-5">Ubah Stok Produk</h3>
-  <form method="POST" enctype="multipart/form-data">
     <div class="container">
-      <input type="hidden" name="id_product" value="<?= $d['id_product']; ?>">
-      <div class="mb-3">
-        <label for="formGroupExampleInput" class="form-label">Nama Produk</label>
-        <input type="text" class="form-control" id="name_product" placeholder="Nama Produk" name="name_product" value="<?= $d['name_product']; ?>" required>
-      </div>
-      <div class="mb-3">
-        <label for="formGroupExampleInput2" class="form-label">Jumlah</label>
-        <input type="text" class="form-control" id="stock_product" placeholder="Jumlah" name="stock_product" value="<?= $d['stock_product']; ?>" required>
-      </div>
-      <div class="mb-3">
-        <label for="formGroupExampleInput" class="form-label">Harga</label>
-        <input type="text" class="form-control" id="price" placeholder="Harga" name="price" value="<?= $d['price']; ?>" required>
-      </div>
-      <div class="mb-3">
-        <input type="hidden" name="gambar_lama" value="<?= $d['image']; ?>">
-        <label for="formGroupExampleInput2" class="form-label">Gambar</label>
-        <input class="form-control gambar-noft" onchange="previewImage()" type="file" id="image" name="image">
-        <img src="./img/produk/<?= $d['image']; ?>" width="120" style="display: block;" alt="" class="img-preview m-2">
-      </div>
-      <a href="dashboard.php" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5" />
-        </svg>kembali</a>
-      <button type="submit" class="btn btn-primary" name="ubah">Ubah Data</button>
+      <h3 class="container p-5">Ubah Stok Produk</h3>
+      <form method="POST" enctype="multipart/form-data">
+        <div class="container">
+          <input type="hidden" name="id_product" value="<?= $d['id_product']; ?>">
+          <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">Nama Produk</label>
+            <input type="text" class="form-control" id="name_product" placeholder="Nama Produk" name="name_product" value="<?= $d['name_product']; ?>" required>
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput2" class="form-label">Jumlah</label>
+            <input type="text" class="form-control" id="stock_product" placeholder="Jumlah" name="stock_product" value="<?= $d['stock_product']; ?>" required>
+          </div>
+          <div class="mb-3">
+            <label for="formGroupExampleInput" class="form-label">Harga</label>
+            <input type="text" class="form-control" id="price" placeholder="Harga" name="price" value="<?= $d['price'];  ?>" required>
+          </div>
+          <div class="mb-3">
+            <input type="hidden" name="gambar_lama" value="<?= $d['image']; ?>">
+            <label for="formGroupExampleInput2" class="form-label">Gambar</label>
+            <input class="form-control gambar-noft" onchange="previewImage()" type="file" id="image" name="image">
+            <p>pastikan ukuran 1:1 dan size dibawah 5MB</p>
+            <img src="./img/produk/<?= $d['image']; ?>" width="120" style="display: block;" alt="" class="img-preview m-2">
+          </div>
+          <a href="produk.php" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5M10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5" />
+            </svg>kembali</a>
+          <button type="submit" class="btn btn-primary" name="ubah">Ubah Data</button>
+        </div>
+      </form>
     </div>
-  </form>
+  </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
 </script>
