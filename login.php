@@ -42,10 +42,10 @@ if (isset($_POST['login'])) {
         <?php if (isset($login['error'])) : ?>
           <p><?= $login['pesan']; ?></p>
         <?php endif; ?>
-        
+
         <form method="POST">
           <img class="rounded mx-auto d-block mb-4" src="./img/logo/logo4.png" alt="Logo" width="70" height="70">
-          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+          <h1 class="h3 mb-3 fw-normal">Login</h1>
 
           <div class="form-floating">
             <input type="username" class="form-control" id="floatingInput" placeholder="Username" id="username" name="username" autofocus autocomplete="off" required>
