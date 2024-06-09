@@ -18,14 +18,7 @@
             </button>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="dashboard.php">Dashboard</a></li>
-              <li><a class="dropdown-item" href="tambah.php">Tambah Barang</a></li>
               <li>
-                <form class="d-flex mt-3" role="search">
-                  <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn" type="submit">
-                    <span class="material-symbols-outlined"> search </span>
-                  </button>
-                </form>
               </li>
               <li>
                 <hr class="dropdown-divider">

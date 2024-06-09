@@ -51,7 +51,7 @@ if (isset($_POST['cari'])) {
       <a href="tambah.php" class="btn btn-primary">Tambah Barang</a>
 
       <!-- search button -->
-      <form class="d-flex mt-3 col-md-6" role="search" method="POST" action="">
+      <form class="d-flex mt-3 mb-3 col-md-6" role="search" method="POST" action="">
         <input class="form-control me-2 keyword" type="text" placeholder="cari produk" aria-label="Search" name="keyword">
         <button class="btn bg-success-subtle tombol-cari" type="submit" name="cari">
           <span> <i class="bi bi-search" style="font-size: 20px;"></i> </span>
@@ -60,8 +60,8 @@ if (isset($_POST['cari'])) {
 
       <!-- tabel produk -->
       <div class="containerproduk">
-        <table class="table">
-          <tr>
+        <table class="table table-striped table-bordered">
+          <tr class="table-dark">
             <th scope="col">#</th>
             <th scope="col">Nama Produk</th>
             <th scope="col">jumlah</th>

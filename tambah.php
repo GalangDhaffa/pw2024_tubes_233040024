@@ -42,7 +42,7 @@ if (isset($_POST['tambah'])) {
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 </head>
 
-<body>
+<body style="height:100vh;">
   <!-- sidebar -->
   <div class="d-flex h-100">
     <?php include './include/sidebar.php'; ?>

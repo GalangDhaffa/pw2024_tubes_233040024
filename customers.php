@@ -43,12 +43,12 @@ $add = query("SELECT * FROM users");
     <?php include './include/sidebar.php'; ?>
 
     <div class="container">
-      <h1 class="m-5">Customers</h1>
+      <h1 class="m-5">Pelanggan</h1>
 
       <!-- tabel produk -->
       <div class="containerproduk">
-        <table class="table">
-          <tr>
+        <table class="table table-striped table-bordered">
+          <tr class="table-dark">
             <th scope="col">#</th>
             <th scope="col">Username</th>
             <th scope="col">Email</th>

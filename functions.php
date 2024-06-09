@@ -1,4 +1,7 @@
 <?php
+
+// session_start();
+
 // koneksi
 function koneksi()
 {
@@ -17,6 +20,7 @@ function query($query)
 
   return $rows;
 }
+
 
 // tambah data
 function upload($file)
@@ -168,15 +172,16 @@ function login($data)
     if (password_verify($password, $user['password'])) {
       session_start();
       $_SESSION['login'] = true;
+      $_SESSION['id_user'] = $user['id_user'];
+      $_SESSION['username'] = $user['username'];
+      $_SESSION['role'] = $user['id_role'] == 1 ? 'admin' : 'user';
       if ($user['id_role'] == 1) {
         $_SESSION['role'] = 'admin';
         header("Location: dashboard.php");
-
         exit;
       } else {
         $_SESSION['role'] = 'user';
-        header("Location: index_login.php");
-
+        header("Location: dashboard.php");
         exit;
       }
     }
