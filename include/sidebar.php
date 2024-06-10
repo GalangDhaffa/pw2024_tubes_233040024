@@ -73,7 +73,7 @@ $role = $_SESSION['role']; // Tambahkan ini untuk mendapatkan peran pengguna
     <hr>
     <div class="dropdown">
       <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" id="dropdownUser1" aria-expanded="false">
-        <img src="./img/produk/nophoto.png" alt="" width="32" height="32" class="rounded-circle me-2">
+        <img src="./img/logo/nophoto.png" alt="" width="32" height="32" class="rounded-circle me-2">
         <strong><?= $username ?></strong>
       </a>
       <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser1">

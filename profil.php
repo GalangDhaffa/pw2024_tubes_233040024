@@ -43,7 +43,7 @@ $username = $_SESSION['username'];
     <div class="container mt-5">
       <div class="profile-card">
         <div class="profile-picture">
-          <img src="./img/produk/nophoto.png" alt="Profile Picture">
+          <img src="./img/logo/nophoto.png" alt="Profile Picture">
         </div>
         <div class="profile-info">
           <h2><?= $username ?></h2>
