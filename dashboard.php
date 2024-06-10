@@ -24,6 +24,7 @@ $username = $_SESSION['username'];
   <title>Secreto Custom Prestige</title>
   <link rel="stylesheet" href="./css/style.css" />
   <link rel="stylesheet" href="./css/screen.css" />
+  <link rel="icon" href="img/logo/logo4.png" type="image/gif">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Josefin+Sans&family=Lilita+One&display=swap" rel="stylesheet" />
@@ -40,7 +41,6 @@ $username = $_SESSION['username'];
 
 
 
-    <img src="./img/logo/logo4.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
     <div class="container px-4 py-5" id="custom-cards">
       <h1 style="font-family: 'Josefin Sans', sans-serif;" class="mt-5 ms-5">Selamat datang,<b>"<?= $username ?>"</b></h1>
 
@@ -71,6 +71,7 @@ $username = $_SESSION['username'];
               </h3>
               <ul class="d-flex list-unstyled mt-auto">
                 <li class="me-auto">
+                  <img src="./img/logo/logo4.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
                 </li>
                 <li class="d-flex align-items-center me-3">
                   <svg class="bi me-2" width="1em" height="1em">

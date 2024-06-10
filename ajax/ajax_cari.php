@@ -4,8 +4,8 @@ require '../functions.php';
 $add = cari($_GET['keyword']);
 
 ?>
-<table class="table">
-        <tr>
+<table class="table table-striped table-bordered">
+        <tr class="table-dark">
           <th scope="col">#</th>
           <th scope="col">Nama Produk</th>
           <th scope="col">jumlah</th>
