@@ -46,7 +46,6 @@ $d = $d[0];
 <body>
   <div class="container">
     <?php
-
     $image_path = './img/produk/' . ($d['image']);
     if (file_exists($image_path)) {
       echo '<img src="' . $image_path . '" width="800" class="rounded mx-auto d-block m-3" alt="Produk">';
